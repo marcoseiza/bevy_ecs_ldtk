@@ -243,7 +243,6 @@ fn expand_sprite_sheet_bundle_attribute(
                         index: #index,
                         ..Default::default()
                     },
-                    transform: Transform::from_xyz(#tx, #ty, 0.0),
                     ..Default::default()
                 },
             }
