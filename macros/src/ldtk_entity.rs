@@ -193,7 +193,7 @@ fn expand_sprite_sheet_bundle_attribute(
         .parse_meta()
         .expect("Cannot parse #[sprite_sheet_bundle...] attribute")
     {
-        syn::Meta::List(syn::MetaList { nested, .. }) if nested.len() == 10 => {
+        syn::Meta::List(syn::MetaList { nested, .. }) if nested.len() == 8 => {
             let mut nested_iter = nested.iter();
 
             let asset_path = &match nested_iter.next() {
@@ -227,14 +227,6 @@ fn expand_sprite_sheet_bundle_attribute(
             let index = match nested_iter.next() {
                 Some(syn::NestedMeta::Lit(syn::Lit::Int(asset))) => asset.base10_parse::<usize>().unwrap(),
                 _ => panic!("Eighth argument of #[sprite_sheet_bundle(...)] should be an int")
-            };
-            let tx = match nested_iter.next() {
-                Some(syn::NestedMeta::Lit(syn::Lit::Float(asset))) => asset.base10_parse::<f32>().unwrap(),
-                _ => panic!("Ninth argument of #[sprite_sheet_bundle(...)] should be an float")
-            };
-            let ty = match nested_iter.next() {
-                Some(syn::NestedMeta::Lit(syn::Lit::Float(asset))) => asset.base10_parse::<f32>().unwrap(),
-                _ => panic!("Tenth argument of #[sprite_sheet_bundle(...)] should be an float")
             };
 
             quote! {
